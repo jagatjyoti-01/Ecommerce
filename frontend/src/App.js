@@ -68,7 +68,10 @@ function App() {
       <>
         <Context.Provider value={{
 
-          fetchUserDetails   //user details featch and shere every component by context provider (index.js in context folder)
+          fetchUserDetails,   //user details featch and shere every component by context provider (index.js in context folder)
+          countProduct,
+          featchUserAddtoCart
+          
         }} >
           <ToastContainer />
 

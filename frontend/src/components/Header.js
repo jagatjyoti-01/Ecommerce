@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import Logo from './Logo'
 import { ImGrin, ImSearch } from "react-icons/im";
 import { FaRegUserCircle } from "react-icons/fa";
@@ -16,6 +16,8 @@ const Header = () => {
   const dispatch = useDispatch()
   //console.log("user header", user)
 
+
+  const context=useContext(countProduct)
   const hendelLogout = async () => {
     const featchData = await fetch(SummerApi.logout_user.url, {
       method: SummerApi.logout_user.method,
