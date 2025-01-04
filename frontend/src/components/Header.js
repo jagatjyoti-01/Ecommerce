@@ -9,6 +9,7 @@ import SummerApi from '../common';
 import { toast } from 'react-toastify';
 import { setUserDetails } from '../store/userSlice';
 import ROLE from '../common/role';
+import Context from '../context';
 
 const Header = () => {
   const [menudisplay,setmenudisplay]=useState(false)
@@ -16,8 +17,10 @@ const Header = () => {
   const dispatch = useDispatch()
   //console.log("user header", user)
 
+// here the context use for countAddProduct present in add to cart product (app.js featchUserAddtoCart)
+  const context=useContext(Context)
+  console.log('header add to cart count',context)
 
-  const context=useContext(countProduct)
   const hendelLogout = async () => {
     const featchData = await fetch(SummerApi.logout_user.url, {
       method: SummerApi.logout_user.method,
@@ -82,9 +85,14 @@ const Header = () => {
           </div>
           <div className='text-2xl  relative'>
             <span><FaShoppingCart /></span>
-            <div className=' flex bg-red-600 text-white w-5 h-5 rounded-full p-1 items-center justify-center absolute -top-2 -right-3  '>
-              <p className='text-sm'>0</p>
-            </div>
+            {
+              user?._id && (
+                <div className=' flex bg-red-600 text-white w-5 h-5 rounded-full p-1 items-center justify-center absolute -top-2 -right-3  '>
+                <p className='text-sm'>{context?.countProduct}</p>
+              </div>
+              )
+            }
+          
           </div>
           <div>
             {

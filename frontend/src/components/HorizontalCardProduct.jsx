@@ -15,13 +15,13 @@ const HorizontalCardProduct = ({ catagory, heading }) => {
   const [scroll, setScroll] = useState(0);
   const scrollElement = useRef();
 
-  const { fetchUserAddToCart } = useContext(Context);
+  const { featchUserAddtoCart } = useContext(Context);
   
-
-  const handleAddToCart = async (e, id) => {
+const handleAddToCart = async (e, id) => {
     await addToCart(e, id);
-    // fetchUserAddToCart();
+     featchUserAddtoCart();
   };
+  
 
   const fetchdata = async () => {
     setLoading(true);

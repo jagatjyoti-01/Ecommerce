@@ -73,7 +73,9 @@ function App() {
           featchUserAddtoCart
           
         }} >
-          <ToastContainer />
+          <ToastContainer
+          position="top-center"
+           />
 
           <Header></Header>
          
