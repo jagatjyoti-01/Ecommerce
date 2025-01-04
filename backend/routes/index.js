@@ -25,6 +25,7 @@ const getCatagorywiseProduct = require('../controller/product/getCatagoryWisepro
 const getProductDetails=require('../controller/product/getProductDetails');
 const addToCartController=require('../controller/user/addToCartController')
 const countAddToCartProduct=require('../controller/user/countAddToCartProduct')
+const addToCartViewProduct=require('../controller/user/addtoCartViewProduct')
 
 
 // Define the route with the correct handler
@@ -57,4 +58,6 @@ router.post("/product-Details",getProductDetails)
 //user adad to cart
 router.post("/addtocart",authToken,addToCartController)  
 router.get('/countAddToCartProduct',authToken,countAddToCartProduct)
+router.get('/addToCartViewProduct',authToken,addToCartViewProduct)
+
 module.exports = router;
