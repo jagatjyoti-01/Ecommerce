@@ -16,7 +16,7 @@ import { setUserDetails } from './store/userSlice';
 function App() {
   //this is the user number of product add in the cart 
   const [countProduct,setCountProduct]=useState(0)
-  console.log('number of product in cart',countProduct)
+ // console.log('number of product in cart',countProduct)
 
 
 

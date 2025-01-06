@@ -19,7 +19,7 @@ const Header = () => {
 
 // here the context use for countAddProduct present in add to cart product (app.js featchUserAddtoCart)
   const context=useContext(Context)
-  console.log('header add to cart count',context)
+  //console.log('header add to cart count',context)
 
   const hendelLogout = async () => {
     const featchData = await fetch(SummerApi.logout_user.url, {
