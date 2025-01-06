@@ -9,6 +9,8 @@ import AllUser from "../pages/AllUser";
 import AllProduct from "../pages/AllProduct";
 import CatagoryProduct from "../pages/CatagoryProduct";
 import ProductDetails from "../pages/ProductDetails";
+import Cart from "../pages/Cart";
+
 
 const router = createBrowserRouter([
     {
@@ -39,7 +41,12 @@ const router = createBrowserRouter([
             {
                 path: 'product/:id',
                 element: <ProductDetails />
-            },
+            }, 
+            {
+                  path: 'Cart',
+                    element: <Cart />
+
+            }   ,       
             {
                 path: "admin-penal",
                 element: <AdminPenal />,
