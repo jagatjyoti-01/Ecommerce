@@ -66,7 +66,7 @@ function ChangeUserRole({name,email,role,onClose,userid,callfun
                 })
             }
         </select></div>
-        <button className='w-fit mx-auto block  px-3 py-2 bg-red-600 text-white hover:bg-red-700 rounded-full ' onClick={updateUserRole}>Change Role</button>
+        <button className='w-fit mx-auto block  px-3 py-2 bg-red-600 text-white hover:bg-red-700 rounded-full ' onClick={updateUserRole}>Changee Role</button>
         </div>
         
     </div>
