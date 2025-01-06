@@ -83,7 +83,7 @@ const Header = () => {
            
 
           </div>
-          <div className='text-2xl  relative'>
+          <Link to={"/Cart"} className='text-2xl  relative'>
             <span><FaShoppingCart /></span>
             {
               user?._id && (
@@ -93,7 +93,7 @@ const Header = () => {
               )
             }
           
-          </div>
+          </Link>
           <div>
             {
               user?._id ? (
