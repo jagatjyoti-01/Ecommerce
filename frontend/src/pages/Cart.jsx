@@ -26,7 +26,7 @@ function Cart() {
     <div className=' text-center text-lg py-3'>
         {
             data.length===0 & !loading && (
-                <div>no data</div>
+                <div>no avl data</div>
             )
                
             
