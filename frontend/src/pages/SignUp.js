@@ -163,7 +163,7 @@ return (
           </div>
           <button className='bg-red-600 text-white px-6 py-2 w-full max-w-[150px] rounded-full hover:scale-110 transition-all mx-auto block my-4 hover:bg-red-700'onClick={hendelSubmit} >Sign-up</button>
         </form>
-        <p>Alredy have an account ? <Link to={"/Login"} className=' text-red-600 hover:text-red-700'>Login</Link></p>
+        <p>Alredy have an account? <Link to={"/Login"} className=' text-red-600 hover:text-red-700'>Login</Link></p>
       </div>
 
     </div>
