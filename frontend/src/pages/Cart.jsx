@@ -42,6 +42,7 @@ function Cart() {
         "Content-Type": "application/json",
         },
         body:JSON.stringify({
+          _id:id,
           quantity: qty + 1,
          
         })
@@ -56,7 +57,7 @@ function Cart() {
 }
 
 const decreaseQty = async (id,qty) => {
-  if(qty>=2){
+  if(qty >=2){
     const responcese=await fetch(SummerApi.updateCartProduct.url, {
       method: SummerApi.updateCartProduct.method,
       credentials: "include",
@@ -64,6 +65,7 @@ const decreaseQty = async (id,qty) => {
         "Content-Type": "application/json",
         },
         body:JSON.stringify({
+          _id:id,
           quantity: qty - 1,       
         })
   })
@@ -75,8 +77,29 @@ const decreaseQty = async (id,qty) => {
 }
 }
 
+const deleteProduct = async (id) => {
+  const responcese=await fetch(SummerApi.deleteCartProduct.url, {
+    method: SummerApi.deleteCartProduct.method,
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+      },
+      body:JSON.stringify({
+        _id:id,       
+      })
+})
+const responceData=await responcese.json()
+
+if(responceData.success){  
+  fetchData();
+}
+}
+
+
+const totalqty = data.reduce((previousValue, CurrentValue) => previousValue + CurrentValue.quantity, 0);
   useEffect(() => {
     fetchData();
+    context.featchUserAddtoCart();
   }, []);
   return (
     <div className="mx-auto container">
@@ -108,12 +131,12 @@ const decreaseQty = async (id,qty) => {
                       />
                     </div>
                     <div className="p-4 relative ">
-                      <div className="absolute right-0 text-red-600 hover:bg-red-600 hover:text-white w-6 h-6 flex justify-center items-center rounded">
+                      <div className="absolute right-0 text-red-600 hover:bg-red-600 hover:text-white w-6 h-6 flex justify-center items-center rounded" onClick={()=>deleteProduct(product?._id)}>
                       <MdDelete />
 
                       </div>
 
-                      <h2 className="text-lg lg:text-2xl text-ellipsis line-clamp-1">
+                      <h2 className="text-lg lg:text-xl text-ellipsis line-clamp-1">
                         {product?.productId?.productName}
                       </h2>
                       <p className="capitalize text-slate-500">
@@ -148,7 +171,13 @@ const decreaseQty = async (id,qty) => {
           {loading ? (
             <div className="h-36 bg-slate-200 border-slate-200">total</div>
           ) : (
-            <div className="h-36 bg-slate-200">t</div>
+            <div className="h-36 bg-slate-200">
+              <h2 className="text-white bg-red-600 px-4 py-1">Summary</h2>
+              <div>
+                <p>Quantity</p>
+                <p>{totalqty}</p>
+              </div>
+            </div>
           )}
         </div>
       </div>
