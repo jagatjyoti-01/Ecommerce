@@ -2,7 +2,7 @@ const addtoCartModel = require('../../models/cartProduct')
 const addToCartViewProduct = async (req, res) => {
     try {
         const currentUser = req.userId
-        const result=await addtoCartModel.find({userId:currentUser})
+        const result=await addtoCartModel.find({userId:currentUser}).populate("productId")
         res.json({
             success: true,
             data: result,
