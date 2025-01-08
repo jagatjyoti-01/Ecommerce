@@ -63,6 +63,10 @@ const SummerApi={
     addToCartViewProduct:{
         url:`${backendDomain}/api/addToCartViewProduct`,
         method:'get'
+    },
+    updateCartProduct:{
+        url:`${backendDomain}/api/update-cart-product`,
+        method:'post'
     }
 
 
