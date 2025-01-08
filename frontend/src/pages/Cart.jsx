@@ -1,6 +1,7 @@
 import { React, useEffect, useState, useContext } from "react";
 import SummerApi from "../common";
 import Context from "../context";
+import displayCurrency from "../helper/displayCurrency";
 
 function Cart() {
   const [data, setData] = useState([]);
@@ -13,20 +14,19 @@ function Cart() {
     setLoading(true);
     const response = await fetch(SummerApi.addToCartViewProduct.url, {
       method: SummerApi.addToCartViewProduct.method,
-      credentials : 'include',
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
     });
-    setLoading(false)
+    setLoading(false);
     const responseData = await response.json();
-    console.log('Fetched data:', responseData);
+    console.log("Fetched data:", responseData);
 
     if (responseData.success) {
       setData(responseData.data);
-     
     }
-    console.log('data is ',responseData.data)
+    console.log("data is ", responseData.data);
   };
   // const handleLoading = async () => {
   //   await fetchData();
@@ -44,30 +44,53 @@ function Cart() {
       {/* VIEW  PRODUCT */}
       <div className="flex flex-col lg:flex-row gap-10 lg:justify-between p-4 px-10">
         <div className="w-full max-w-3xl">
-          {loading ? (
-            loadingCart.map((item, index) => (
-              <div
-                key={item + "add to cart loading"}
-                className="w-full bg-slate-200 h-32  my-1 border-slate-200 animate-pulse rounded"
-              ></div>
-            ))
-          ) : (
-           data.map((product,index)=>{
-            return(
-              <div
-            key={product?._id + "add to cart loading"}
-            className="w-full bg-white h-32  my-1 border-slate-200  rounded grid grid-cols-[128px,1fr]">
-            <div className="w-32 h-32 bg-slate-200 ">
-              <img src={product?.productId?.productImage[0]} alt="" className="w-full h-full object-scale-down mix-blend-multiply"/>
-            </div>
-            <div className="p-4"> 
-              <h2 className="text-lg lg:text-2xl text-ellipsis line-clamp-1">{product?.productId?.productName}</h2>
-            </div>
-          </div>
-            )
-            
-           })
-          )}
+          {loading
+            ? loadingCart.map((item, index) => (
+                <div
+                  key={item + "add to cart loading"}
+                  className="w-full bg-slate-200 h-32  my-1 border-slate-200 animate-pulse rounded"
+                ></div>
+              ))
+            : data.map((product, index) => {
+                return (
+                  <div
+                    key={product?._id + "add to cart loading"}
+                    className="w-full bg-white h-32  my-1 border-slate-200  rounded grid grid-cols-[128px,1fr]"
+                  >
+                    <div className="w-32 h-32 bg-slate-200 ">
+                      <img
+                        src={product?.productId?.productImage[0]}
+                        alt=""
+                        className="w-full h-full object-scale-down mix-blend-multiply"
+                      />
+                    </div>
+                    <div className="p-4">
+                      <h2 className="text-lg lg:text-2xl text-ellipsis line-clamp-1">
+                        {product?.productId?.productName}
+                      </h2>
+                      <p className="capitalize text-slate-500">
+                        {product?.productId?.catagory}
+                      </p>
+                      
+                      <div className="flex items-center justify-between">
+                        <p className="text-red-600 font-medium text-lg">{displayCurrency(product?.productId?.sellingPrice)}</p>
+                        <p className="text-slate-600 font-semibold text-lg">{displayCurrency(product?.productId?.sellingPrice * product?.quantity) }</p>
+                      </div>
+
+                      <div className="flex gap-3 items-center mt-1">
+                        <button className=" border border-red-600 text-red-600 hover:bg-red-600 hover:text-white  w-6 h-6 flex justify-center items-center rounded">
+                          -
+                        </button>
+                        <span>{product?.quantity}</span>
+                        <button className="border border-red-600 text-red-600 hover:bg-red-600 hover:text-white w-6 h-6 flex justify-center items-center rounded ">
+                          +
+                        </button>
+                      </div>
+
+                    </div>
+                  </div>
+                );
+              })}
         </div>
         {/*.... total product .... */}
 
