@@ -28,7 +28,7 @@ const countAddToCartProduct=require('../controller/user/countAddToCartProduct')
 const addToCartViewProduct=require('../controller/user/addtoCartViewProduct')
 const updateAddtoCartpoduct =require('../controller/user/updateAddtoCartpoduct')
 const deleteAddtoCartProduct=require('../controller/user/deleteAddtoCartProduct')
-
+const searchProduct=require('../controller/product/searchProduct') 
 
 // Define the route with the correct handler
 router.post('/signUp', userSignUpController);
@@ -56,6 +56,8 @@ router.get("/get-product-catagory",getCatagoryProduct)
 
 router.post("/catagory-product",getCatagorywiseProduct)
 router.post("/product-Details",getProductDetails)
+router.get('/search',searchProduct)
+
 
 //user adad to cart
 router.post("/addtocart",authToken,addToCartController)  
