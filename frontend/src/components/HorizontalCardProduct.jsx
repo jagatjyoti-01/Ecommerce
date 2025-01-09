@@ -9,6 +9,8 @@ import Context from "../context";
 const HorizontalCardProduct = ({ catagory, heading }) => {
   const [data, setdata] = useState([]);
 
+  
+
   const [loading, setLoading] = useState(true);
   const loadingList = new Array(13).fill(null);
 

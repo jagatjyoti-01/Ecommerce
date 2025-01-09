@@ -26,6 +26,8 @@ const getProductDetails=require('../controller/product/getProductDetails');
 const addToCartController=require('../controller/user/addToCartController')
 const countAddToCartProduct=require('../controller/user/countAddToCartProduct')
 const addToCartViewProduct=require('../controller/user/addtoCartViewProduct')
+const updateAddtoCartpoduct =require('../controller/user/updateAddtoCartpoduct')
+const deleteAddtoCartProduct=require('../controller/user/deleteAddtoCartProduct')
 
 
 // Define the route with the correct handler
@@ -59,5 +61,7 @@ router.post("/product-Details",getProductDetails)
 router.post("/addtocart",authToken,addToCartController)  
 router.get('/countAddToCartProduct',authToken,countAddToCartProduct)
 router.get('/addToCartViewProduct',authToken,addToCartViewProduct)
+router.post('/update-cart-product',authToken,updateAddtoCartpoduct)
+router.post('/delete-cart-product',authToken,deleteAddtoCartProduct)
 
 module.exports = router;
