@@ -97,6 +97,7 @@ if(responceData.success){
 
 
 const totalqty = data.reduce((previousValue, CurrentValue) => previousValue + CurrentValue.quantity, 0);
+const totalAmount = data.reduce((previousValue, CurrentValue) => previousValue + (CurrentValue.productId.sellingPrice * CurrentValue.quantity), 0);
   useEffect(() => {
     fetchData();
     context.featchUserAddtoCart();
@@ -169,15 +170,31 @@ const totalqty = data.reduce((previousValue, CurrentValue) => previousValue + Cu
 
         <div className=" w-full mt-5 lg:mt-0 max-w-sm ">
           {loading ? (
-            <div className="h-36 bg-slate-200 border-slate-200">total</div>
-          ) : (
-            <div className="h-36 bg-slate-200">
-              <h2 className="text-white bg-red-600 px-4 py-1">Summary</h2>
-              <div>
-                <p>Quantity</p>
-                <p>{totalqty}</p>
+            <div className="h-36 bg-slate-200 border-slate-200">
+              <div className='h-36 bg-white'>
+              <h2 className='text-white bg-slate-300 px-4 py-1'></h2>
+              <div className='flex items-center justify-between px-4 gap-2 font-medium text-lg text-slate-600'>
+                <p></p>
+                <p></p>
+            </div>
               </div>
             </div>
+          ) : (
+            <div className='h-36 bg-white'>
+            <h2 className='text-white bg-red-600 px-4 py-1'>Summary</h2>
+            <div className='flex items-center justify-between px-4 gap-2 font-medium text-lg text-slate-600'>
+                <p>Quantity</p>
+                <p>{totalqty}</p>
+            </div>
+
+            <div className='flex items-center justify-between px-4 gap-2 font-medium text-lg text-slate-600'>
+                <p>Total Price</p>
+                <p>{displayCurrency(totalAmount)}</p>    
+            </div>
+
+            <button className='bg-blue-600 p-2 text-white w-full mt-2'>Payment</button>
+
+        </div>
           )}
         </div>
       </div>
