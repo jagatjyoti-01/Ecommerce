@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react'
 import Logo from './Logo'
 import { ImGrin, ImSearch } from "react-icons/im";
 import { FaRegUserCircle } from "react-icons/fa";
-import { FaShoppingCart } from "react-icons/fa";
+import { FaShoppingCart, } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import SummerApi from '../common';
@@ -10,11 +10,13 @@ import { toast } from 'react-toastify';
 import { setUserDetails } from '../store/userSlice';
 import ROLE from '../common/role';
 import Context from '../context';
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
   const [menudisplay,setmenudisplay]=useState(false)
   const user = useSelector(state => state?.user?.user)
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   //console.log("user header", user)
 
 // here the context use for countAddProduct present in add to cart product (app.js featchUserAddtoCart)
@@ -37,6 +39,17 @@ const Header = () => {
       toast.error(data.message)
     }
   }
+
+  const handleSearch = (e)=>{
+    const { value } = e.target
+    
+
+    if(value){
+      navigate(`/search?q=${value}`)
+    }else{
+      navigate("/search")
+    }
+  }
   return (
     <header className=' h-16 shadow-md bg-white fixed w-full z-40'>
       <div className="h-full container mx-auto flex items-center px-4 justify-between">
@@ -47,8 +60,8 @@ const Header = () => {
         </div>
 
         <div className='hidden lg:flex items-center w-full justify-between max-w-sm border rounded-full '>
-          <input type="text" placeholder='Search product here  ' className='w-full outline-none pl-4' />
-          <div className='text-lg min-w-[50px] h-8 bg-red-600 flex items-center  justify-center rounded-r-full text-white'>
+          <input type="text" placeholder='Search product here  ' className='w-full outline-none pl-4' onChange={handleSearch}  />
+          <div className='text-lg min-w-[50px] h-8 bg-red-600 flex items-center  justify-center rounded-r-full text-white' >
             <ImSearch />
           </div>
         </div>

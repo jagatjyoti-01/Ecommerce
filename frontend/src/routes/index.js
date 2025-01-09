@@ -10,6 +10,7 @@ import AllProduct from "../pages/AllProduct";
 import CatagoryProduct from "../pages/CatagoryProduct";
 import ProductDetails from "../pages/ProductDetails";
 import Cart from "../pages/Cart";
+import SearchProduct from "../pages/SearchProduct";
 
 
 const router = createBrowserRouter([
@@ -46,7 +47,11 @@ const router = createBrowserRouter([
                   path: 'Cart',
                     element: <Cart />
 
-            }   ,       
+            },
+            {
+             path:'/search',
+                element:<SearchProduct />
+            }  ,     
             {
                 path: "admin-penal",
                 element: <AdminPenal />,
