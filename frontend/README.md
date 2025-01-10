@@ -76,3 +76,5 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 
 // how to zoom  in product details section 
+
+//in product addtocart calculate total price and total quantity and display it in cart icon
