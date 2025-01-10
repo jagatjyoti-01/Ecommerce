@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState,useContext } from "react";
 import { json, useParams } from "react-router-dom";
 import SummerApi from "../common";
 import { FaStar } from "react-icons/fa";
@@ -7,6 +7,9 @@ import displayINRCurrency from "../helper/displayCurrency";
 import VerticalCardProduct from "../components/VerticalCardProduct";
 import CategroyWiseProductDisplay from "../components/CategroyWiseProductDisplay";
 import CatagoryList from "../components/CatagoryList";
+import addToCart from "../helper/addToCart";
+import Context from '../context'
+
 function ProductDetails() {
   const [data, setData] = useState({
     productName: "",
@@ -48,7 +51,7 @@ function ProductDetails() {
   console.log('product details',data)
   useEffect(() => {
     featchProductDetails();
-  }, []);
+  }, [params]);
 
   const hendelMouseOver = (image) => {
     setActiveImage(image);
@@ -73,6 +76,12 @@ function ProductDetails() {
     setOpenZoomImage(false)
   }
   const normalizedData = { ...data, category: data.catagory };
+  const { featchUserAddtoCart } = useContext(Context)
+  
+  const handleAddToCart = async (e, id) => {
+    await addToCart(e, id);
+     featchUserAddtoCart();
+  };
   return (
     <div className="container mx-auto p-4">
       <div className="min-h-[200px] flex flex-col lg:flex-row gap-4">
@@ -196,7 +205,7 @@ function ProductDetails() {
                 <button className="border-2 border-red-600 rounded px-3 py-1 min-w-[120px] text-red-600 font-medium hover:bg-red-600 hover:text-white">
                   Buy
                 </button>
-                <button className="border-2 border-red-600 rounded px-3 py-1 min-w-[120px] font-medium text-white bg-red-600 hover:text-red-600 hover:bg-white">
+                <button className="border-2 border-red-600 rounded px-3 py-1 min-w-[120px] font-medium text-white bg-red-600 hover:text-red-600 hover:bg-white"  onClick={(e)=>handleAddToCart(e,data?._id)}>
                   Add To Cart
                 </button>
               </div>
