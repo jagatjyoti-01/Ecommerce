@@ -3,7 +3,6 @@ const bcrypt = require('bcrypt');
 async function userSignUpController(req, res) {
     try {
         const { name, email, password } = req.body
-
         // console.log(req.body)
         if (!email) {
             throw new Error("please provide the email")
@@ -17,7 +16,6 @@ async function userSignUpController(req, res) {
         const saltRounds = 10;
         const salt = bcrypt.genSaltSync(saltRounds);
         const hashPassword = bcrypt.hashSync(password, salt);
-
 
         if (!hashPassword) {
             throw new Error(" something is error that password is not valid")
@@ -46,11 +44,8 @@ async function userSignUpController(req, res) {
             error: false,
             message: "user create successfull"
         })
-
-
     }
     catch (err) {
-
         res.json({
             message: err.message || err,
             error: true,

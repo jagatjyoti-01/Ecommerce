@@ -40,15 +40,19 @@ const Header = () => {
     }
   }
 
+
+
+  //for the search product ................................................................
   const handleSearch = (e)=>{
     const { value } = e.target
-    
-
     if(value){
       navigate(`/search?q=${value}`)
     }else{
       navigate("/search")
     }
+
+//for the search product ................................................................
+
   }
   return (
     <header className=' h-16 shadow-md bg-white fixed w-full z-40'>
