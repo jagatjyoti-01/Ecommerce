@@ -3,7 +3,7 @@ import Logo from './Logo'
 import { ImGrin, ImSearch } from "react-icons/im";
 import { FaRegUserCircle } from "react-icons/fa";
 import { FaShoppingCart, } from "react-icons/fa";
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import SummerApi from '../common';
 import { toast } from 'react-toastify';
@@ -12,11 +12,17 @@ import ROLE from '../common/role';
 import Context from '../context';
 import { useNavigate } from 'react-router-dom';
 
+
 const Header = () => {
   const [menudisplay,setmenudisplay]=useState(false)
   const user = useSelector(state => state?.user?.user)
   const dispatch = useDispatch()
   const navigate = useNavigate()
+
+  
+  const searchInput=useLocation()
+  const [searchdata, setSearchInput] = useState(searchInput.search.split('=')[1])
+  console.log("searchInput",searchInput.search.split('=')[1])
   //console.log("user header", user)
 
 // here the context use for countAddProduct present in add to cart product (app.js featchUserAddtoCart)
@@ -45,6 +51,7 @@ const Header = () => {
   //for the search product ................................................................
   const handleSearch = (e)=>{
     const { value } = e.target
+    setSearchInput(value)
     if(value){
       navigate(`/search?q=${value}`)
     }else{
@@ -64,7 +71,7 @@ const Header = () => {
         </div>
 
         <div className='hidden lg:flex items-center w-full justify-between max-w-sm border rounded-full '>
-          <input type="text" placeholder='Search product here  ' className='w-full outline-none pl-4' onChange={handleSearch}  />
+          <input type="text" placeholder='Search product here  ' className='w-full outline-none pl-4' value={searchdata} onChange={handleSearch}  />
           <div className='text-lg min-w-[50px] h-8 bg-red-600 flex items-center  justify-center rounded-r-full text-white' >
             <ImSearch />
           </div>
