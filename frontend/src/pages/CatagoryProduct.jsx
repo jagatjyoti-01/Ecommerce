@@ -1,8 +1,62 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import  productCatagory from '../helper/productCatagory'
+import CategroyWiseProductDisplay from "../components/CategroyWiseProductDisplay";
+import SummerApi from "../common";
 
 function CatagoryProduct() {
+
+  const [data,setdata]=useState([])
+  const [loading,setloading]=useState(false)
+  const [selectedCatagory,setselectedCatagory]=useState([])
+  const [filtercatagory,setfiltercatagory]=useState([])
+
+const fetchdata=async()=>{
+
+  const responce=await fetch(SummerApi.filterProduct.url,{
+    method:SummerApi.filterProduct.method,
+    headers:{
+      "Content-Type":"application/json"
+    },
+    body:JSON.stringify({
+      category:filtercatagory
+    })
+  })
+  const dataResponce=await responce.json()
+  console.log('dataResponce',dataResponce)
+  setdata(dataResponce?.data || []);
+  console.log(dataResponce?.data)
+    
+}
+  const hendelselectCatagory=(e)=>{
+    const {name,value,checked}=e.target
+    console.log("name,value,checked",name,value,checked)
+    setselectedCatagory((prev)=>{
+      return{
+        ...prev,
+        [value]:checked 
+      }
+    })
+  }
+
+  console.log('selectedCatagory',selectedCatagory)
+  useEffect(()=>{
+    fetchdata()
+  },[filtercatagory])
+
+  useEffect(()=>{
+    const arrayOfCatagory=Object.keys(selectedCatagory).map((catagoryKeyName)=>{
+      if(selectedCatagory[catagoryKeyName]){
+        return catagoryKeyName
+      }
+      return null
+    }).filter((el=>el!==null))
+    setfiltercatagory(arrayOfCatagory)
+    console.log('selectCatogoryitem are',arrayOfCatagory)
+
+  },[selectedCatagory])
+
+  
   
   const params = useParams();
   console.log("njjjk", params);
@@ -40,12 +94,11 @@ function CatagoryProduct() {
               productCatagory.map((categoryName, index) => {
                 return (
                    <div className='flex items-center gap-3'>
-                                 <input type='checkbox' name={"category"} value={categoryName?.value} id={categoryName?.value}  />
+                                 <input type='checkbox' name={"category"} checked={selectedCatagory[categoryName?.value]} value={categoryName?.value} id={categoryName?.value} onChange={ hendelselectCatagory}  />
                                  <label htmlFor={categoryName?.value}>{categoryName?.label}</label>
                               </div>
                 )
               })
-
             
             }
               
@@ -63,6 +116,11 @@ function CatagoryProduct() {
                     <VerticalCard data={data} loading={loading}/>
                   )
               } */}
+              {
+                params.catagoryName && (
+                  <CategroyWiseProductDisplay category={params.catagoryName} heading={"Recommended Product"} />
+                )
+              }
              </div>
             </div>
       </div>
