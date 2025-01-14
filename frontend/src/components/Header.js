@@ -103,9 +103,6 @@ const Header = () => {
                 </div>
               )
             }
-
-           
-
           </div>
           <Link to={"/Cart"} className='text-2xl  relative'>
             <span><FaShoppingCart /></span>
