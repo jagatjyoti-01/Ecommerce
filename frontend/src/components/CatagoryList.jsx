@@ -6,6 +6,7 @@ function CatagoryList() {
     const[catagoryProduct,setcatagyProduct]=useState([])
     const [loader,setLoader]=useState(false)
     const catagoryLoading=new Array(13).fill(null)
+    
 
     const featchCatagoryProduct=async()=>{
         setLoader(true)
@@ -34,7 +35,7 @@ function CatagoryList() {
             ) : (
                 catagoryProduct.map((product,index)=>{
                     return(
-                     <Link to={"/product-category/" +product?.catagory} className='cursor-pointer' key={product?.category}>
+                     <Link to={"/product-category?catagory="+product?.catagory} className='cursor-pointer' key={product?.category}>
                      <div className='w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden p-4 bg-slate-200 flex items-center justify-center'>
                          <img src={product?.productImage[0]} alt={product?.catagory} className='h-full object-scale-down mix-blend-multiply hover:scale-125 transition-all'/>
                      </div>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams,useLocation } from "react-router-dom";
 import  productCatagory from '../helper/productCatagory'
 import CategroyWiseProductDisplay from "../components/CategroyWiseProductDisplay";
 import SummerApi from "../common";
@@ -10,6 +10,11 @@ function CatagoryProduct() {
   const [loading,setloading]=useState(false)
   const [selectedCatagory,setselectedCatagory]=useState([])
   const [filtercatagory,setfiltercatagory]=useState([])
+  const location=useLocation()
+  const URLCategory=new URLSearchParams(location.search)
+  const URLCategoryListinArray=URLCategory.get('catagory')
+
+  console.log('URLCategoryListinArray',URLCategoryListinArray)
 
 const fetchdata=async()=>{
 
