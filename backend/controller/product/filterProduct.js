@@ -9,7 +9,7 @@ const filterProductController = async(req,res)=>{
                 "$in" : categoryList
             }
         })
-
+        
         res.json({
             data : product,
             message : "product",

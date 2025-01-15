@@ -6,37 +6,43 @@ import SummerApi from "../common";
 
 function CatagoryProduct() {
 
-  const [data,setdata]=useState([])
-  const [loading,setloading]=useState(false)
-  const [selectedCatagory,setselectedCatagory]=useState([])
-  const [filtercatagory,setfiltercatagory]=useState([])
-  const location=useLocation()
-  const URLCategory=new URLSearchParams(location.search)
-  const URLCategoryListinArray=URLCategory.get('catagory')
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [selectedCatagory, setSelectedCatagory] = useState([]);
+  const [filtercatagory, setFiltercatagory] = useState([]);
+  const location = useLocation();
+  const URLCatagory = new URLSearchParams(location.search);
+  const URLCatagoryListinArray = URLCatagory.get('catagory')?.split(',') || [];
 
-  console.log('URLCategoryListinArray',URLCategoryListinArray)
+  const urlCatagoryObject = {};
+  URLCatagoryListinArray.forEach(el => {
+    urlCatagoryObject[el] = true;
+  });
+  console.log('urlCatagoryObject', urlCatagoryObject);
 
-const fetchdata=async()=>{
+  console.log('URLCatagoryListinArray', URLCatagoryListinArray);
 
-  const responce=await fetch(SummerApi.filterProduct.url,{
-    method:SummerApi.filterProduct.method,
-    headers:{
-      "Content-Type":"application/json"
-    },
-    body:JSON.stringify({
-      category:filtercatagory
-    })
-  })
-  const dataResponce=await responce.json()
-  console.log('dataResponce',dataResponce)
-  setdata(dataResponce?.data || []);
-  console.log(dataResponce?.data)
-    
-}
+  const fetchdata = async () => {
+    setLoading(true);
+    const response = await fetch(SummerApi.filterProduct.url, {
+      method: SummerApi.filterProduct.method,
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        category: filtercatagory
+      })
+    });
+    const dataResponse = await response.json();
+    console.log('dataResponse', dataResponse);
+    setData(dataResponse?.data || []);
+    setLoading(false);
+  };
+
   const hendelselectCatagory=(e)=>{
     const {name,value,checked}=e.target
     console.log("name,value,checked",name,value,checked)
-    setselectedCatagory((prev)=>{
+    setSelectedCatagory((prev)=>{
       return{
         ...prev,
         [value]:checked 
@@ -56,7 +62,7 @@ const fetchdata=async()=>{
       }
       return null
     }).filter((el=>el!==null))
-    setfiltercatagory(arrayOfCatagory)
+    setFiltercatagory(arrayOfCatagory)
     console.log('selectCatogoryitem are',arrayOfCatagory)
 
   },[selectedCatagory])
