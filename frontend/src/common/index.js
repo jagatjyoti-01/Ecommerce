@@ -1,4 +1,4 @@
-//import getCatagorywiseProduct from "../../../backend/controller/product/getCatagoryWiseproduct";
+a//import getCatagorywiseProduct from "../../../backend/controller/product/getCatagoryWiseproduct";
 
 
 
